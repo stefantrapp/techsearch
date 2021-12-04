@@ -1,0 +1,2 @@
+Die Typen in der Datei dtos.ts sind generiert. Nicht manuell ändern! Siehe die Datei
+techsearch\backend\src\main\java\de\fernunihagen\techsearch\restservice\dtos\readme.md

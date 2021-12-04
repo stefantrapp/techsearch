@@ -1,0 +1,69 @@
+# Wo gehört diese Datei hin? Siehe: https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config.files
+
+logging:
+    level:
+        de:
+            fernunihagen:
+                techsearch: DEBUG
+
+spring:
+    datasource:
+        username: postgres
+        password: admin
+        platform: postgres
+        url: jdbc:postgresql://localhost:5432/techsearch
+        hikari:
+            maximum-pool-size: 50        
+    jpa:
+        database: POSTGRESQL
+        generate-ddl: true
+        open-in-view: false
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                batch_versioned_data: true
+                jdbc:
+                    batch_size: 50
+                    lob:
+                        non_contextual_creation: true
+                order_inserts: true
+                order_updates: true
+        show-sql: false
+    profiles:
+        active: all-in-one
+    servlet:
+        multipart:
+            max-file-size: 100MB
+            max-request-size: 100MB
+
+
+# Konfiguration für den Webcrawler
+crawling:
+    # Pfad zum Verzeichnis in dem temporär, heruntergeladene Dateien gespeichert werden. Es kann absolut oder relativ zum aktuellen Verzeichnis angegeben werden. 
+    tempStoragePath: ..\..\techsearchData\crawlTempDir
+    
+    # Die folgenden Werte spielen beim Beenden des Crawlings eine Rolle und geben an, wie lange jeweils noch gewartet werden soll. Sie werden eins zu eins
+    # an die Configuration von crawler4j weitergegeben. Der Standardwert ist 10. 
+    cleanupDelaySeconds: 1
+    threadShutdownDelaySeconds: 1
+    threadMonitoringDelaySeconds: 1
+    # Gibt an, wie viele Millisekunden zwischen Request an den selben Host gewartet werden soll. 
+    politenessDelay: 60
+    # Anzahl der Thread, die gleichzeitig Crawlen 
+    numberOfCrawlers: 10
+
+index:
+    storagePath: ..\..\techsearchData\lucene-index-{@Lang}
+
+sent2vec:
+    executablePath: /media/user/Additional/sent2vec/fasttext
+    # Bei der Datei, wird die Endung .bin automatisch ergänzt
+    modelPath: /media/user/Additional/sent2vec/model-{@Lang}
+    #{@Lang} wird durch die Sprache ersetzt
+    #sentencesPath: E:\temp\sents-{@Lang}.txt
+    sentencesPath: /media/user/Additional/sent2vec/sents-{@Lang}.txt
+
+word2vec:
+    # Das ist ein Pfad zu einer ZIP-Datei
+    modelPath: ..\..\techsearchData\word2vec\model-{@Lang}.zip

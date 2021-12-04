@@ -1,0 +1,43 @@
+<h1>Administration</h1>
+
+<mat-tab-group #tabgroup mat-align-tabs="start" (selectedTabChange)="tabChanged($event.index)" [selectedIndex]="tabIndex">
+    <mat-tab label="Hintergrundverarbeitung" class="tab-spaceing" >
+        
+        <mat-card >
+            <button mat-raised-button color="primary" (click)="getAllJobStates()">Status aktualisieren</button>
+            <mat-card *ngFor="let jobStatus of jobStatusAll" class="job-card" >
+                <span class="label">Jobname:</span>{{getJobName(jobStatus)}}<br>
+                <span class="label">Soll der Job laufen:</span>{{jobStatus.shouldRun | jaNein}}<br>
+                <span class="label">Läuft der Job:</span>{{jobStatus.running | jaNein}}<br>
+                <span class="label">Letztes Lebenszeichen:</span>{{jobStatus.lastSignOfLife | date:'medium'}}<br>
+                <span class="label">Startzeit:</span> {{jobStatus.startTime | date:'medium'}}<br>
+
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" (click)="scheduleJob(jobStatus.jobName)">Joblauf einplanen</button>
+                    <button mat-raised-button color="primary" (click)="cancelJob(jobStatus.jobName)" matTooltip="Das Abbrechen kann einige Zeit dauern" >Job abbrechen</button>
+                </mat-card-actions>
+            </mat-card>
+        </mat-card>
+    </mat-tab>
+    <mat-tab label="Einstellungen" class="tab-spaceing" >
+        <button mat-raised-button (click)="getAllSettings()" matTooltip="Die Einstellungen neu vom Server laden" style="margin: 1em 0em 1em 0.5em;">Neu laden</button>
+        <div *ngIf="settings">
+            <mat-card *ngFor="let setting of settings; let index = index" style="width: 100%; max-width: 60em;" >
+                <h2 *ngIf="index === 0 || settings[index - 1].gruppe !== setting.gruppe" >{{setting.gruppe}}</h2>
+                
+                <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 0; padding-bottom: 0;" >
+                    <mat-label style="font-size: 1.4em;">{{setting.name}}</mat-label><br>
+                    <textarea matInput [(ngModel)]="setting.value" rows="5" ></textarea>
+                </mat-form-field>
+                <mat-card-actions align="end">
+                    <button mat-raised-button color="primary" (click)="saveSetting(setting)">Speichern</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </mat-tab>
+    <mat-tab label="Dokumente" class="tab-spaceing" >
+        <mat-card >
+            <button mat-raised-button color="primary" (click)="deleteAllDocuments()">Alle Dokumente löschen</button>
+        </mat-card>
+    </mat-tab>
+</mat-tab-group>

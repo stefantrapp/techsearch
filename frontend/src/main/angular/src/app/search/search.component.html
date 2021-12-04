@@ -1,0 +1,187 @@
+<h1>Suche</h1>
+
+
+<mat-tab-group #tabgroup mat-align-tabs="start" (selectedTabChange)="onTabChanged($event);">
+    <mat-tab label="Index" class="tab-spaceing">
+        <mat-card >
+            <mat-form-field appearance="fill" class="input-big search-form-field">
+                <mat-label>Anfrage</mat-label>
+                <input matInput type="text" [(ngModel)]="query" >
+                <button *ngIf="query" matSuffix mat-icon-button aria-label="Clear" (click)="query=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <br><br>
+            <mat-form-field appearance="fill">
+                <mat-label>Sprache</mat-label>
+                <mat-select [(value)]="language">
+                  <mat-option *ngFor="let language of languages" [value]="language">
+                    {{language.displayName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="searchIndex()">Index durchsuchen</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-tab>
+    
+    <mat-tab label="Word2Vec" class="tab-spaceing">
+        <mat-card >
+            <mat-form-field appearance="fill" class="input-big search-form-field">
+                <mat-label>Anfrage</mat-label>
+                <input matInput type="text" [(ngModel)]="queryWord2Vec" >
+                <button *ngIf="queryWord2Vec" matSuffix mat-icon-button aria-label="Clear" (click)="queryWord2Vec=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <br><br>
+            <mat-form-field appearance="fill">
+                <mat-label>Sprache</mat-label>
+                <mat-select [(value)]="language">
+                  <mat-option *ngFor="let language of languages" [value]="language">
+                    {{language.displayName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="searchWord2Vec()">Word2Vec-Modell durchsuchen</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-tab>
+
+    <mat-tab label="Doc2Vec" class="tab-spaceing">
+        <mat-card >
+            <mat-form-field appearance="fill" class="input-big search-form-field">
+                <mat-label>Anfrage</mat-label>
+                <input matInput type="text" [(ngModel)]="queryDoc2Vec" >
+                <button *ngIf="queryDoc2Vec" matSuffix mat-icon-button aria-label="Clear" (click)="queryDoc2Vec=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <br><br>
+            <mat-form-field appearance="fill">
+                <mat-label>Sprache</mat-label>
+                <mat-select [(value)]="language">
+                  <mat-option *ngFor="let language of languages" [value]="language">
+                    {{language.displayName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="searchDoc2Vec()">Doc2Vec-Modell durchsuchen</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-tab>
+
+    <mat-tab label="Sent2Vec" class="tab-spaceing">
+        <mat-card >
+            <mat-form-field appearance="fill" class="input-big search-form-field">
+                <mat-label>Anfrage</mat-label>
+                <input matInput type="text" [(ngModel)]="querySent2Vec" >
+                <button *ngIf="querySent2Vec" matSuffix mat-icon-button aria-label="Clear" (click)="querySent2Vec=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <br><br>
+            <mat-form-field appearance="fill">
+                <mat-label>Sprache</mat-label>
+                <mat-select [(value)]="language">
+                  <mat-option *ngFor="let language of languages" [value]="language">
+                    {{language.displayName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="searchSent2Vec()">Sent2Vec-Modell durchsuchen</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-tab>
+
+    <mat-tab label="POS-Modell" class="tab-spaceing">
+        <mat-card >
+            Bitte ein Subjekt eingeben, für das die Lösung eines Problems gesucht wird<br><br>
+            <mat-form-field appearance="fill" class="input-big search-form-field">
+                <mat-label>Anfrage</mat-label>
+                <input matInput type="text" [(ngModel)]="queryPos" >
+                <button *ngIf="queryPos" matSuffix mat-icon-button aria-label="Clear" (click)="queryPos=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <br><br>
+            <mat-form-field appearance="fill">
+                <mat-label>Sprache</mat-label>
+                <mat-select [(value)]="language">
+                  <mat-option *ngFor="let language of languages" [value]="language">
+                    {{language.displayName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="searchPos()">POS-Modell durchsuchen</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-tab>
+
+    <mat-tab label="t-SNE" class="tab-spaceing">
+        <mat-card >
+            Bitte eine Liste von Wörtern getrennt durch Kommas eingeben<br><br>
+            <mat-form-field appearance="fill" class="input-big search-form-field">
+                <mat-label>Anfrage</mat-label>
+                <input matInput type="text" [(ngModel)]="tsnequery" >
+                <button *ngIf="query" matSuffix mat-icon-button aria-label="Clear" (click)="query=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+            
+            <br><br>
+            <mat-form-field appearance="fill">
+                <mat-label>Sprache</mat-label>
+                <mat-select [(value)]="language">
+                  <mat-option *ngFor="let language of languages" [value]="language">
+                    {{language.displayName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="callGenerateTsne()">Diagramm erstellen</button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-tab>
+    
+
+</mat-tab-group>
+
+<div *ngIf="word2vecWords && selectedTab === 1">
+    <br>
+    <button *ngFor="let word of word2vecWords" mat-stroked-button class="word2vec-word-spacing" (click)="searchWord2VecWithWord(word)">{{word}}</button>
+</div>
+
+<img *ngIf="tsneData && selectedTab === 5" [src]="getData(tsneData)"><img>
+
+<div *ngIf="nothingFound">
+    <mat-card>Keine Ergebnisse gefunden</mat-card>
+</div>
+
+<ng-container *ngIf="searchResults && selectedTab <= 4">
+    <mat-card *ngFor="let searchResult of searchResults" class="result-card">
+        <mat-card-header>
+            <mat-card-title>Dokument: <a href="javascript:void(0)"
+                    (click)="showDocument(searchResult)">{{searchResult.titel}}</a><br></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <span [innerHtml]="searchResult.auszug"></span>
+        </mat-card-content>
+    </mat-card>
+</ng-container>

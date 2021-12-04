@@ -1,0 +1,77 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/" (click)="sidenav.toggle()">
+        <mat-icon class="icon">home</mat-icon>
+        <span class="label">Start</span>
+      </a>
+
+      <a mat-list-item routerLink="/suche" (click)="sidenav.toggle()">
+        <mat-icon class="icon">search</mat-icon>
+        <span class="label">Suche</span>
+      </a>
+
+      <a mat-list-item type="button" routerLink="/upload" (click)="sidenav.toggle()">
+        <mat-icon class="icon">file_upload</mat-icon>
+        <span class="label">Upload</span>
+      </a>
+
+      <a mat-list-item type="button" routerLink="/dokumente" (click)="sidenav.toggle()">
+        <mat-icon class="icon">description</mat-icon>
+        <span class="label">Dokumente</span>
+      </a>
+
+      <a mat-list-item type="button" routerLink="/administration" (click)="sidenav.toggle()">
+        <mat-icon class="icon">admin_panel_settings</mat-icon>
+        <span class="label">Administration</span>
+      </a>
+      
+      <a mat-list-item type="button" routerLink="/crawljobs" (click)="sidenav.toggle()">
+        <mat-icon class="icon">cloud_download</mat-icon>
+        <span class="label">Webcrawl-Jobs</span>
+      </a>
+
+      <a mat-list-item type="button" routerLink="/bulkimportjobs" (click)="sidenav.toggle()">
+        <mat-icon class="icon">drive_folder_upload</mat-icon>
+        <span class="label">Bulkimport-Jobs</span>
+      </a>
+      
+     </mat-nav-list>
+  </mat-sidenav>
+  
+  
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <!-- fxHide.gt-xs  -->
+      <div>
+        <button id="menubutton" mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+      <div>
+        <a>
+          Technlogie Suche
+        </a>
+      </div>
+      <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+        <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+          <li>
+            <a routerLink="/">
+              <mat-icon class="icon">home</mat-icon>
+              <span class="label">Start</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/upload">
+              <mat-icon class="icon">file_upload</mat-icon>
+              <span class="label">Upload</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </mat-toolbar>
+    <main class="main">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,57 @@
+<h1>Dokumente</h1>
+<mat-form-field class="search-form-field" floatLabel="never">
+    <mat-label>Suche nach Name</mat-label>
+    <input #searchInput matInput [(ngModel)]="searchQueryName" placeholder="Name" autocomplete="off"
+        (keyup.enter)="search()" autofocus matInputAutofocus>
+    <mat-hint>% als Plathalter verwenden. Groß- und Kleinschreibung wird beachtet.</mat-hint>
+</mat-form-field>
+<br>
+<mat-form-field class="search-form-field" floatLabel="never">
+    <mat-label>Suche nach ID</mat-label>
+    <input #searchInput matInput [(ngModel)]="searchQueryId" placeholder="ID" autocomplete="off"
+        (keyup.enter)="search()" autofocus matInputAutofocus>
+    <mat-hint>Nur die ID eingeben</mat-hint>
+</mat-form-field>
+
+<button mat-raised-button color="primary" class="space-left" (click)="search()">Suchen</button>
+
+<ng-container *ngIf="documents">
+    <mat-card *ngFor="let doc of documents" class="result-card">
+        <mat-card-header>
+            <mat-card-title *ngIf="!doc.deleted" >Dokument: <a href="javascript:void(0)" (click)="showDocument(doc)">{{doc.name}}</a><br>
+            </mat-card-title>
+            <mat-card-title *ngIf="doc.deleted" >Dokument: {{doc.name}}<br>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div *ngIf="doc.deleted" style="font-weight: bold;">Dokument ist Gelöscht</div>
+            <div fxLayout="row" fxLayoutAlign="start start" >
+                <div fxLayout="column" fxLayoutAlign="start start" style="margin-right: 3em;">
+                    <div><span class="document-label">Id:</span>{{doc.id}}</div>
+                    <div><span class="document-label">Name:</span>{{doc.name}}</div>
+                    <div><span class="document-label">Sprache:</span>{{doc.language}}</div>
+                    <div><span class="document-label">Dokumentenformat:</span> {{doc.documentFormat}}</div>
+                    <div><span class="document-label">Dokumententyp:</span> {{doc.documentType}}</div>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="start start">
+                    <div><span class="document-label">Länge des Originaltextinhalts:</span>{{doc.originalTextLength}}</div>
+                    <div><span class="document-label">Länge des Originalbinärinhalts:</span>{{doc.originalBinaryLength}}</div>
+                    <div><span class="document-label">Länge der erkannten Sätze:</span>{{doc.sentenceLength}}</div>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button matTooltip="Dokument löschen" (click)="deleteDocument(doc)" [disabled]="doc.deleted">
+                <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-button matTooltip="Details anzeigen" (click)="showDocumentDetails(doc)" [disabled]="doc.deleted">
+                <mat-icon>info</mat-icon>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+
+    <mat-paginator [length]="pageable.totalElements" [pageSize]="pageable.size" [pageSizeOptions]="[5, 10, 25, 100]"
+        (page)="updatePaging($event)" aria-label="Seite auswählen">
+    </mat-paginator>
+
+</ng-container>

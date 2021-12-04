@@ -1,0 +1,120 @@
+<style>
+  .my-drop-zone {
+    border: dotted 3px lightgray;
+  }
+
+  .nv-file-over {
+    border: dotted 3px red;
+  }
+
+  /* Default class applied to drop zones on over */
+  .another-file-over-class {
+    border: dotted 3px green;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <mat-card class="file-card" ng2FileDrop (fileOver)="fileOverBase($event)" [uploader]="uploader">
+        <!-- <mat-card-header>
+            <mat-card-title>Dateien</mat-card-title>
+          </mat-card-header> -->
+        <mat-card-content>
+          <div draggable="true" ngClass="{{dragAreaClass}}">
+            <div>
+              <div class="text-center">
+                Hierher Dateien ziehen<br><br>
+                oder
+                <br><br>
+                <a href="javascript:void(0)" (click)="file.click()">
+                  Klicken um Dateien auszuwählen
+                </a>
+                <input type="file" #file ng2FileSelect [multiple]="true" [uploader]="uploader" style="display:none" />
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>Sprache der Dokumente</mat-label>
+        <mat-select [(value)]="language">
+          <mat-option *ngFor="let language of languages" [value]="language">
+            {{language.displayName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <div>
+        <br> <br>
+        Fortschritt:
+        <mat-progress-bar [value]="uploader.progress"></mat-progress-bar>
+        <br>
+      </div>
+      <button mat-raised-button (click)="uploadAll()" [disabled]="!uploader.getNotUploadedItems().length" class="button-space">
+        <span class="glyphicon glyphicon-upload"></span> Alle Dateien hochladen
+      </button>
+      <button mat-raised-button (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading" class="button-space">
+        <span class="glyphicon glyphicon-ban-circle"></span> Alle Dateien abbrechen
+      </button>
+      <button mat-raised-button (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length" class="button-space">
+        <span class="glyphicon glyphicon-trash"></span> Alle Dateien entfernen
+      </button>
+    </div>
+
+    <div class="col-md-9" style="margin-bottom: 40px; margin-top: 3em;">
+
+      <p>Anzahl der Dateien: {{ uploader?.queue?.length }}</p>
+      <br>
+      <table class="table" *ngIf="uploader?.queue?.length">
+        <thead>
+          <tr>
+            <th width="20%" style="text-align: left;">Name</th>
+            <th>Größe</th>
+            <th>Fortschritt</th>
+            <th>Status</th>
+            <th>Aktionen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of uploader.queue">
+            <td><strong>{{ item?.file?.name }}</strong></td>
+            <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+            <td *ngIf="uploader.options.isHTML5">
+              <mat-progress-bar [value]="item.progress"></mat-progress-bar>
+            </td>
+            <td class="text-center">
+              <span *ngIf="item.isSuccess">OK</span>
+              <span *ngIf="item.isCancel">C</span>
+              <span *ngIf="item.isError">X</span>
+            </td>
+            <td nowrap>
+              <button mat-raised-button color="primary" (click)="doUpload(item)"
+                [disabled]="item.isReady || item.isUploading || item.isSuccess" class="button-space">
+                Hochladen
+              </button>
+              <button mat-raised-button color="primary" (click)="item.cancel()" [disabled]="!item.isUploading" class="button-space">
+                Abbrechen
+              </button>
+              <button mat-raised-button color="primary" (click)="item.remove()" class="button-space">
+                Entfernen
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+
+
+    </div>
+
+  </div>
+</div>

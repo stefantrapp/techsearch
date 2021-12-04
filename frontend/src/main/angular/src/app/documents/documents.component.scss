@@ -1,0 +1,32 @@
+
+.deleted-layer {
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    position: absolute;
+    background-color: #fff;
+    padding-right: 10em;
+    opacity: 0.9;
+    text-align: center;
+}
+
+.search-form-field {
+    min-width: 30em;
+}
+
+.space-right {
+    margin-right: 1em;
+  }
+  
+  
+  .space-left {
+    margin-left: 1em;
+  }
+  
+  .document-label {
+      margin-right: 0.5em;
+  }
+
+  .result-card {
+      margin-top: 1em;
+  }

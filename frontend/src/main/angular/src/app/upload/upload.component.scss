@@ -1,0 +1,51 @@
+.dragarea {
+    font-size: 1.5rem;
+    padding: 1.5rem;
+    background-color: #fff;
+    color: #bbb;
+}
+
+.droparea {
+  font-size: 1.5rem;
+  padding: 1.5rem;
+  background-color: #eff;
+  color: #aaa;
+}
+
+.file-card {
+    max-width: 40em;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Style the list (remove margins and bullets, etc) */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  
+  ul li {
+    border: 1px solid #ddd;
+    margin-top: 1em;
+    background-color: #f6f6f6;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block;
+    position: relative;
+  }
+  
+  ul li:hover {
+    background-color: #eee;
+  }
+
+  .close:hover {background: #bbb;}
+
+  .button-space {
+    margin-right: 1em;
+  }

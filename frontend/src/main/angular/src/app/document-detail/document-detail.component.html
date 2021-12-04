@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>Dokumentdetails</h2>
+<form>
+    <mat-dialog-content class="mat-typography">
+        <div fxLayout="row" fxLayoutAlign="start start" >
+            <div fxLayout="column" fxLayoutAlign="start start" style="margin-right: 3em;">
+                <div><span class="document-label">Id: </span>{{doc.id}}</div>
+                <div><span class="document-label">Name: </span>{{doc.name}}</div>
+                <div><span class="document-label">Sprache: </span>{{doc.language}}</div>
+                <div><span class="document-label">Dokumentenformat: </span> {{doc.documentFormat}}</div>
+                <div><span class="document-label">Dokumententyp: </span> {{doc.documentType}}</div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="start start">
+                <div><span class="document-label">Länge des Originaltextinhalts: </span>{{doc.originalTextLength}}</div>
+                <div><span class="document-label">Länge des Originalbinärinhalts: </span>{{doc.originalBinaryLength}}</div>
+                <div><span class="document-label">Länge der erkannten Sätze: </span>{{doc.sentenceLength}}</div>
+            </div>
+        </div>
+        <br>
+        <button mat-raised-button color="primary" (click)="testPreprocessDocument()">Vorverarbeitung testen</button>
+
+        <div *ngIf="fullDto" >
+            <br>
+            Sätze:<br>
+            <textarea rows="10" class="content-text-areas">{{fullDto.sentences}}</textarea><br>
+            Sätze lemmatisiert:<br>
+            <textarea rows="10" class="content-text-areas">{{fullDto.sentencesLemmatizated}}</textarea><br>
+            Sätze analysiert:<br>
+            <textarea rows="10" class="content-text-areas">{{fullDto.sentencesAnalyzed}}</textarea><br>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button [mat-dialog-close]="true" (click)="close()">Schließen</button>
+    </mat-dialog-actions>
+</form>

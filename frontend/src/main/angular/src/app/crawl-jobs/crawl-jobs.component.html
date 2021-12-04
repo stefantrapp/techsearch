@@ -1,0 +1,38 @@
+<h1>Webcrawl-Jobs</h1>
+<button mat-raised-button color="primary" class="space-right" (click)="createJob()">
+    <mat-icon>add</mat-icon>Neuen Webcrawl-Job anlegen
+</button>
+<mat-form-field class="search-form-field" floatLabel="never">
+    <input #searchInput matInput [(ngModel)]="searchName" placeholder="Suchen" autocomplete="off"
+        (keyup.enter)="search()" autofocus matInputAutofocus>
+</mat-form-field>
+
+<button mat-raised-button color="primary" class="space-left" (click)="search()">Suchen</button>
+
+<ng-container *ngIf="jobs">
+    <mat-card *ngFor="let job of jobs" class="result-card">
+        <mat-card-header>
+            <mat-card-title><a href="javascript:void(0)" (click)="editJob(job)"
+                    *ngIf="!job.deleted">{{job.name}}</a><br></mat-card-title>
+            <ng-container *ngIf="job.deleted">{{job.name}}</ng-container>
+        </mat-card-header>
+        <mat-card-content>
+            <ng-container *ngIf="job.deleted">Gelöscht</ng-container>
+            <ng-container *ngIf="!job.deleted">{{job.description}}</ng-container>
+            <br>
+            Startzeit: {{job.startTime | date : 'medium'}}<br>
+            Abgeschlossen: {{job.finished | jaNein}}<br>
+            Endzeit: {{job.finishedTime | date : 'medium' }}
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button matTooltip="Crawljob löschen" (click)="delete(job)" [disabled]="job.deleted">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+
+    <mat-paginator [length]="pageable.totalElements" [pageSize]="pageable.size" [pageSizeOptions]="[5, 10, 25, 100]"
+        (page)="updatePaging($event)" aria-label="Seite auswählen">
+    </mat-paginator>
+
+</ng-container>

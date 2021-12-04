@@ -1,0 +1,1 @@
+%JAVA_HOME%\bin\java.exe -Dfile.encoding=UTF-8 -jar target\backend-1.0.0-SNAPSHOT.jar

@@ -1,0 +1,22 @@
+<h1>Dokumentenansicht</h1>
+
+<ng-container *ngIf="originalText">
+    <button *ngIf="textMode" mat-raised-button (click)="showOriginal()" style="margin: 0em 1em 1em 0.5em;">Originaltext anzeigen</button>
+    <button *ngIf="!textMode" mat-raised-button (click)="showText()" style="margin: 0em 1em 1em 0.5em;">Nur Text anzeigen</button>
+</ng-container>
+
+<ng-container *ngIf="sourceUrl">
+    <p>
+        <a target="_blank" [href]="sourceUrl">Link zum Originaldokument</a>
+    </p>
+</ng-container>
+
+    <p>
+        <a target="_blank" [href]="getDownloadUrl()">Download des Originaldokuments</a>
+    </p>
+
+
+<mat-card >
+    {{viewText}}    
+</mat-card>
+

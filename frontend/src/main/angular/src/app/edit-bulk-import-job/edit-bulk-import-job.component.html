@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Bulkimport-Job {{title}}</h2>
+<form>
+    <mat-dialog-content class="mat-typography">
+        <div style="display: flex; flex-direction: row; flex-wrap: wrap">
+			<mat-card style="display: flex; flex-direction: row; flex-wrap: wrap; flex-grow: 1; margin: 3px">
+                <mat-form-field style="width: 100%">
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="Name" [formControl]="name" required>
+                    <mat-hint>Name zur einfachen Identifizierung des Jobs</mat-hint>
+                </mat-form-field>
+                <br>
+                <mat-form-field style="width: 100%">
+                    <mat-label>Beschreibung</mat-label>
+                    <textarea matInput placeholder="URLs" rows="6" [formControl]="description"></textarea>
+                    <mat-hint>Beschreibung des Jobs</mat-hint>
+                </mat-form-field>
+                <br>
+				<mat-form-field style="width: 100%">
+                    <mat-label>Pfade</mat-label>
+                    <textarea matInput placeholder="URLs" rows="6" [formControl]="paths"></textarea>
+                    <mat-hint>Pfade der EPO-Dateien. Der Server muss darauf Zugriff haben!</mat-hint>
+                </mat-form-field>
+			</mat-card>
+
+			
+		</div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close cdkFocusInitial (click)="save()">Speichern</button>
+        <button mat-button [mat-dialog-close]="true" (click)="cancel()">Abbrechen</button>
+    </mat-dialog-actions>
+</form>

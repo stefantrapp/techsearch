@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>backend</artifactId>
+
+	<name>backend</name>
+	<description>Backend mit Spring Boot</description>
+
+    <properties>
+        <dl4j-master.version>1.0.0-M1.1</dl4j-master.version>
+        <logback.version>1.2.3</logback.version>
+        <java.version>11</java.version>
+        <maven-shade-plugin.version>2.4.3</maven-shade-plugin.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+	<parent>
+		<artifactId>techsearch</artifactId>
+		<groupId>de.fernuni-hagen.techsearch</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-starter</artifactId>
+	    </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-starter-quartz</artifactId>
+	    </dependency>
+        <dependency>
+		  	<groupId>org.quartz-scheduler</groupId>
+		  	<artifactId>quartz</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+		<dependency>
+			<groupId>org.apache.tika</groupId>
+			<artifactId>tika</artifactId>
+			<version>1.25</version>
+			<type>pom</type>
+		</dependency>
+		
+		<dependency>
+		  <groupId>org.modelmapper</groupId>
+		  <artifactId>modelmapper</artifactId>
+		  <version>2.4.4</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>de.fernuni-hagen.techsearch</groupId>
+			<artifactId>frontend</artifactId>
+			<version>${project.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		</dependency>
+
+        <dependency>
+	        <groupId>edu.uci.ics</groupId>
+	        <artifactId>crawler4j</artifactId>
+	        <version>4.4.0</version>
+        </dependency>
+        
+        <dependency>
+		    <groupId>edu.stanford.nlp</groupId>
+		    <artifactId>stanford-corenlp</artifactId>
+		    <version>4.2.0</version>
+		    <exclusions>
+	            <exclusion> <!-- Hier ist ein ältere Version von Lucene dabei. Diesen nicht verwenden.  -->
+	                <groupId>org.apache.lucene</groupId>
+	                <artifactId>lucene-core</artifactId>
+	            </exclusion>
+	        </exclusions>
+		</dependency>
+		<dependency>
+		    <groupId>edu.stanford.nlp</groupId>
+		    <artifactId>stanford-corenlp</artifactId>
+		    <version>4.2.0</version>
+		    <classifier>models</classifier>
+		    <exclusions>
+                <exclusion> <!-- Hier ist ein ältere Version von Lucene dabei. Diesen nicht verwenden.  -->
+                    <groupId>org.apache.lucene</groupId>
+                    <artifactId>lucene-core</artifactId>
+                </exclusion>
+            </exclusions>
+		</dependency>
+		<dependency>
+		    <groupId>edu.stanford.nlp</groupId>
+		    <artifactId>stanford-corenlp</artifactId>
+		    <version>4.2.0</version>
+		    <classifier>models-german</classifier>
+		    <exclusions>
+                <exclusion> <!-- Hier ist ein ältere Version von Lucene dabei. Diesen nicht verwenden.  -->
+                    <groupId>org.apache.lucene</groupId>
+                    <artifactId>lucene-core</artifactId>
+                </exclusion>
+            </exclusions>
+		</dependency>
+
+        <!-- Für Lucene -->
+
+		<dependency>
+		    <groupId>org.apache.lucene</groupId>
+		    <artifactId>lucene-queryparser</artifactId>
+		    <version>8.9.0</version>
+		</dependency>
+		
+		<dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-analyzers-common</artifactId>
+            <version>8.9.0</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-highlighter</artifactId>
+            <version>8.9.0</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-memory</artifactId>
+            <version>8.9.0</version>
+        </dependency>
+        
+        
+        <dependency>
+            <groupId>org.languagetool</groupId>
+            <artifactId>languagetool-core</artifactId>
+            <version>5.5</version>
+            <exclusions>
+                <exclusion> <!-- Hier ist ein ältere Version von Lucene dabei. Diesen nicht verwenden.  -->
+                    <groupId>org.apache.lucene</groupId>
+                    <artifactId>lucene-backward-codecs</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.languagetool</groupId>
+            <artifactId>language-de</artifactId>
+            <version>5.5</version>
+        </dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>de.fernunihagen.techsearch.TechSearchApplication</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+			    <groupId>cz.habarta.typescript-generator</groupId>
+			    <artifactId>typescript-generator-maven-plugin</artifactId>
+			    <version>2.29.814</version>
+			    <executions>
+			        <execution>
+			            <id>generate</id>
+			            <goals>
+			                <goal>generate</goal>
+			            </goals>
+			            <phase>process-classes</phase>
+			        </execution>
+			    </executions>
+			    <configuration>
+			        <jsonLibrary>jackson2</jsonLibrary>
+			        <classPatterns>
+			             <classPattern>de.fernunihagen.techsearch.restservice.dtos.**Dto</classPattern>
+			        </classPatterns>
+			        <outputFileType>implementationFile</outputFileType>
+			        <mapClasses>asClasses</mapClasses>
+			        <mapEnum>asEnum</mapEnum>
+                    <nonConstEnums>true</nonConstEnums>
+    		        <optionalProperties>all</optionalProperties>
+			        <extensions>
+				        <extension>cz.habarta.typescript.generator.ext.JsonDeserializationExtension</extension>
+				    </extensions>
+			        <outputFile>../frontend/src/main/angular/src/app/services/dtos.ts</outputFile>
+			        <outputKind>module</outputKind>
+			    </configuration>
+			</plugin>
+			
+			<plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											cz.habarta.typescript-generator
+										</groupId>
+										<artifactId>
+											typescript-generator-maven-plugin
+										</artifactId>
+										<versionRange>
+											[2.29.814,)
+										</versionRange>
+										<goals>
+											<goal>generate</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
