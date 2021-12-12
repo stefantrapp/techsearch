@@ -10,7 +10,7 @@ Die Anwendung besteht aus einem Backend mittels Spring Boot und einer Frontend m
 1. Ein JDK. Getestet wurde mit einem AdoptOpenJDK 11.0.11.9 [Link](https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.11%2B9/OpenJDK11U-jdk_x64_windows_hotspot_11.0.11_9.msi)
 2. Python 3. Getestet wurde mit WinPYthon [Link](https://github.com/winpython/winpython/releases/download/4.3.20210620/Winpython64-3.9.5.0.exe)
 3. Apache Maven. Getestet wurde mit Apache Maven 3.5.4. [Link](https://dlcdn.apache.org/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.zip)
-4. PostgreSQL. Getestet wurde mit PostgreSQLPortable 13.1 [Link]([https://link](https://get.enterprisedb.com/postgresql/postgresql-13.1-1-windows-x64-binaries.zip))
+4. PostgreSQL. Getestet wurde mit PostgreSQLPortable 13.1 [Link](https://get.enterprisedb.com/postgresql/postgresql-13.1-1-windows-x64-binaries.zip)
 5. Eine leere Datenbank namens "techsearch". Als Zugangsdaten wird der Benutzer "postgres" mit dem Passwort "admin" verwendet. Die Zugangsdaten können in der Datei ```techsearch/backend/config/application.yaml``` geändert werden.
 
 ### Datenbank
