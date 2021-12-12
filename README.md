@@ -60,7 +60,7 @@ java.exe -Dfile.encoding=UTF-8 -jar target\backend-1.0.0-SNAPSHOT.jar
 ```
 Das Python-Backend wird über die Datei ```techsearch/backend-python/run.cmd``` gestartet. Dort könngen, falls notwendig, noch Anpassungen vorgenommen werden.
 
-Beim ersten Start können Fehler auftreten, die daher rühren, dass zunächst automatisch Tabellen in der Datenbank angelegt werden. Die Anwendung in solche einem Fall beenden und nochmals starten.
+Beim ersten Start können Fehler auftreten, die daher rühren, dass zunächst automatisch Tabellen in der Datenbank angelegt werden. Die Anwendung in solch einem Fall beenden und nochmals starten.
 
 Das Frontend ist dann über folgende URL erreichbar:
 http://localhost:8080/
