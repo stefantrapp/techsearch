@@ -1,5 +1,6 @@
 package de.fernunihagen.techsearch.jobs;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -251,6 +252,7 @@ public class CreateSent2VecModelJob implements Job {
 	    public static FileWriter create(String filename) {
 	        OutputStream out = null;
             try {
+				ensureDirectoryExits(filename);
                 out = new FileOutputStream(filename);
             } catch (FileNotFoundException ex) {
                 log.error("Fehler beim Anlegen der Datei für Sätze: " + filename, ex);
@@ -260,6 +262,14 @@ public class CreateSent2VecModelJob implements Job {
 	        FileWriter writer = new FileWriter(filename, out);
             
             return writer;
+	    }
+		
+		private static void ensureDirectoryExits(String filename) {
+	        var file = new File(filename);
+	        File dir = file.getParentFile();
+            if (!dir.exists()) {
+	            dir.mkdirs();
+	        }
 	    }
 	    
 	    public boolean close() {
